@@ -1,3 +1,8 @@
-# DataStructures
+# ALGORITHMS
 
-### Stack - Linked list implementation
+# DATA STRUCTURES
+
+- Stack - Linked list implementation
+- Min Heap
+- Max Heap
+
