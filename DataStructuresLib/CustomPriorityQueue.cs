@@ -42,7 +42,7 @@ namespace DataStructuresLib
         public void Enqueue(T element, int priority)
         {
             var idx = Count;
-            heap[idx] = (element, priority);
+            heap.Add((element, priority));
 
             while (idx != 0 &&
                 heap[idx].priority < heap[Parent(idx)].priority)
@@ -64,6 +64,7 @@ namespace DataStructuresLib
             var root = heap[0];
 
             heap[0] = heap[Count - 1];
+            heap.RemoveAt(Count - 1);
 
             Heapify(0);
 
@@ -131,5 +132,31 @@ namespace DataStructuresLib
             }
         }
 
+
+        public bool checkMinHeap()
+        {
+            if (heap.Count <= 1)
+            {
+                return true;
+            }
+
+            for (int i = 0; i <= (heap.Count - 2) / 2; i++)
+            {
+                // check if node has lower priority than left child
+                if (heap[i].priority > heap[Left(i)].priority)
+                {
+                    return false;
+                }
+
+                // check if node has lower priority than right child and right child exists
+                if (Right(i) != heap.Count && 
+                    heap[i].priority > heap[Right(i)].priority)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
