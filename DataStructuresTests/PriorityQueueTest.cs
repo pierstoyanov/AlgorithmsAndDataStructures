@@ -2,6 +2,7 @@ using NUnit.Framework;
 using DataStructuresLib;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace DataStructuresTests
 {
@@ -90,6 +91,30 @@ namespace DataStructuresTests
                 Assert.That(pq.Count, Is.EqualTo(countBefore));
                 Assert.That(pq.Dequeue(), Is.EqualTo(peek));
             });
+        }
+
+        [Test]
+        public void RemoveLast()
+        {
+            pq.Enqueue(new Item(5), 5);
+            var deque = pq.Dequeue();
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(deque.Value, Is.EqualTo(5));
+                Assert.That(pq.Count, Is.EqualTo(0));
+            });
+
+        }
+
+
+        [Test]
+        public void DequeueEmptyThrowsExceptionTest()
+        {
+            Assert.That(
+                Assert.Throws<InvalidOperationException>(() =>
+                pq.Dequeue()).Message,
+                Is.EqualTo("Queue is empty!"));
         }
     }
 }

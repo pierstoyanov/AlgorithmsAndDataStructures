@@ -58,7 +58,9 @@ namespace DataStructuresLib
 
             if (Count == 1)
             {
-                return heap[Count - 1].element;
+                var result = heap[0];
+                heap.RemoveAt(0);
+                return result.element;
             }
 
             var root = heap[0];
@@ -120,7 +122,7 @@ namespace DataStructuresLib
         private void ValidateNotEmpty()
         {
             if (heap.Count == 0)
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Queue is empty!");
         }
 
         private void ValidateIndex(params int[] indexes)
@@ -131,7 +133,6 @@ namespace DataStructuresLib
                     throw new InvalidOperationException();
             }
         }
-
 
         public bool checkMinHeap()
         {
