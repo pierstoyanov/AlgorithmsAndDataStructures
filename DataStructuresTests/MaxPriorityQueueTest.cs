@@ -6,7 +6,7 @@ using System;
 
 namespace DataStructuresTests
 {
-    public class PriorityQueueTests
+    public class MaxPriorityQueueTest
     {
         private class Item
         {
@@ -19,13 +19,13 @@ namespace DataStructuresTests
         }
 
         private List<Item> items;
-        private CustomPriorityQueue<Item> pq;
+        private MaxPriorityQueue<Item> pq;
         private List<int> priorities;
 
         [SetUp]
         public void Setup()
         {
-            pq = new CustomPriorityQueue<Item>();
+            pq = new MaxPriorityQueue<Item>();
             priorities = new List<int> { 1, 5, 14, 18, 23, 58, 45 };
 
             items = new List<Item>();
@@ -38,14 +38,15 @@ namespace DataStructuresTests
         [TearDown]
         public void TestCleanup()
         {
-            pq = new CustomPriorityQueue<Item>();
+            pq = new MaxPriorityQueue<Item>();
         }
 
         [Test]
         public void EnqueueDequeueTest()
         {
-            var testPriorities = new int[] { 15, 1, 10, 14, 13, 10, 9, 85, 108, 45, 50 };
-            var sorted = testPriorities.OrderBy(i => i);
+            var testPriorities = new int[] { 15, 1, 10, 14 };
+            // 13, 10, 9, 85, 108, 45, 50 ;
+            var sorted = testPriorities.OrderByDescending(i => i);
             foreach (var el in testPriorities)
             {
                 pq.Enqueue(new Item(el), el);
@@ -64,14 +65,14 @@ namespace DataStructuresTests
         }
 
         [Test]
-        public void HeapPropertyTest()
+        public void MaxHeapPropertyTest()
         {
             foreach (var i in items)
             {
                 pq.Enqueue(i, i.Value);
             }
 
-            var isHeap = pq.checkMinHeap();
+            var isHeap = pq.checkMaxHeap();
             Assert.That(isHeap, Is.True);
         }
 
@@ -88,7 +89,7 @@ namespace DataStructuresTests
 
             Assert.Multiple(() =>
             {
-                Assert.That(pq.Count, Is.EqualTo(countBefore));
+                Assert.That(pq, Has.Count.EqualTo(countBefore));
                 Assert.That(pq.Dequeue(), Is.EqualTo(peek));
             });
         }

@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 namespace DataStructuresLib 
 {
-    public class CustomPriorityQueue<T>
+    public class MinPriorityQueue<T>
     {
         private List<(T element, int priority)> heap;
 
-        public CustomPriorityQueue()
+        public MinPriorityQueue()
         {
             heap = new List<(T, int)>();
         }
 
-        public CustomPriorityQueue(T element, int priority)
+        public MinPriorityQueue(T element, int priority)
         {
             heap = new List<(T, int)>();
             Enqueue(element, priority);
@@ -103,12 +103,6 @@ namespace DataStructuresLib
             ValidateNotEmpty();
             return heap[0].element;
         }
-
-        private void HeapifyDown(int index)
-        {
-
-        }
-
 
         private void Swap(int indexOne, int indexTwo)
         {
